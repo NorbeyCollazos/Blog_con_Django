@@ -1,0 +1,56 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}{{title}}{% endblock  %}
+
+{% block titulo_buscador %}
+
+<section class="cta-section theme-bg-light py-5">
+	<div class="container text-center">
+		<h2 class="heading">Blog administrable con Django</h2>
+		<div class="intro">Este es un blog donde puedes registrate e ingresar al panel administrativo para agregar y modificar entradas</div>
+		<form class="signup-form form-inline justify-content-center pt-3" method="GET">
+			<div class="form-group">
+				<label class="sr-only" for="semail">Buscar....</label>
+				<input type="text" id="semail" name="buscar" class="form-control mr-md-1 semail" placeholder="Buscar....">
+			</div>
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+	</div><!--//container-->
+</section>
+
+{% endblock  %}
+
+{% block content %}
+
+    {% load static %}			
+
+	{% for entrada in entradas %}
+		<div class="item mb-5">
+		<div class="media">
+		{% if entrada.image != 'null' and entrada.image.url|length >= 1 %}
+			<img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{entrada.image.url}}" alt="image">					    
+			{% else %}
+			<img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{% static 'assets/images/blog/no_image.jpg' %}" alt="image">
+		{% endif %}
+			<div class="media-body">
+				<h3 class="title mb-1"><a href="{% url 'detalle_entrada' entrada.id %}">{{entrada.title}}</a></h3>
+				<div class="meta mb-1"><span class="date">{{entrada.created_at}}</span><span class="time"></span><span class="comment"><a href="#">{{entrada.user}}</a></span></div>
+				<div class="intro">{{entrada.content|safe}}</div>
+				<a class="more-link" href="{% url 'detalle_entrada' entrada.id %}">Ver más &rarr;</a>
+			</div><!--//media-body-->
+		</div><!--//media-->
+	</div><!--//item-->
+	{% endfor %}
+
+	
+	<nav class="blog-nav nav nav-justified my-5">
+		{% if entradas.has_previous %}
+			<a class="nav-link-prev nav-item nav-link rounded-left" href="?page={{entradas.previous_page_number}}">Anterior<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+		{% endif %}
+		{% if entradas.has_next %}
+			<a class="nav-link-next nav-item nav-link rounded-right" href="?page={{entradas.next_page_number}}">Siguiente<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+		{% endif %}
+	
+	</nav>
+
+{% endblock  %}

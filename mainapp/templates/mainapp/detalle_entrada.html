@@ -1,0 +1,26 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}{{entrada.title}}{% endblock  %}
+
+
+{% block content %}
+
+{% load static %}
+
+                <header class="blog-post-header">
+				    <h2 class="title mb-2">{{entrada.title}}</h2>
+				    <div class="meta mb-3"><span class="date">{{entrada.created_at}}</span><span class="time"></span><span class="comment"><a href="#"></a></span></div>
+			    </header>
+			    
+			    <div class="blog-post-body">
+				    <figure class="blog-banner">
+				        {% if entrada.image != 'null' and entrada.image.url|length >= 1 %}
+						<a href="#"><img class="img-fluid" src="{{entrada.image.url}}" alt="image"></a>
+				    	{% else %}
+							<a href="#"><img class="img-fluid" src="{% static 'assets/images/blog/no_image.jpg' %}" alt="image"></a>
+						{% endif %}
+					</figure>
+				    <p>{{entrada.content|safe}}</p>
+				</div>    
+
+{% endblock  %}
