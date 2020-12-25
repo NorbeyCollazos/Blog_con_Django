@@ -7,3 +7,4 @@ Este proyecto trata del desarrollo de un blog mediante el Framewor Django donde 
 ![Login del panel de administración](https://github.com/NorbeyCollazos/Blog_con_Django/blob/master/mainapp/static/assets/images/vista-login-django.PNG?raw=true)
 
 ![Panel de administración](https://github.com/NorbeyCollazos/Blog_con_Django/blob/master/mainapp/static/assets/images/vista-panel-administracion-django.PNG?raw=true)
+
